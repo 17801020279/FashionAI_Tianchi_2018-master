@@ -5,6 +5,7 @@ from tqdm import tqdm
 from config import *
 
 # rotate images
+# scale：比例
 def rotate(image, angle, center=None, scale=1.0):
     (h, w) = image.shape[:2]
     if center is None:

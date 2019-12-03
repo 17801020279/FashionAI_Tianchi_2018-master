@@ -56,25 +56,53 @@ def train(task):
     x = Dropout(0.5)(x)
     x = [Dense(count, activation='softmax', name=name)(x) for name, count in task_list.items()]
 
+    # model = Model(input_tensor, x)
+    # # model.load_weights('models/base.h5',by_name=True)
+    # model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
+    # model2 = multi_gpu_model(model, 2)
+    #
+    # model2.compile(optimizer=Adam(0.0001), loss='categorical_crossentropy', metrics=[acc])
+    # model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=3, validation_data=(X_valid, y_valid))
+    #
+    # model2.compile(optimizer=Adam(0.000025), loss='categorical_crossentropy', metrics=[acc])
+    # model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=2, validation_data=(X_valid, y_valid))
+    #
+    # model2.compile(optimizer=Adam(0.00000625), loss='categorical_crossentropy', metrics=[acc])
+    # model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=3, validation_data=(X_valid, y_valid))
+    #
+    # model2.compile(optimizer=Adam(0.00000425), loss='categorical_crossentropy', metrics=[acc])
+    # model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=1, validation_data=(X_valid, y_valid))
+    #
+    # model2.compile(optimizer=Adam(0.000001), loss='categorical_crossentropy', metrics=[acc])
+    # model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=1, validation_data=(X_valid, y_valid))
+    # model.save_weights('models/%s.h5' % model_name)
+
+
+#### 修改GPU个数
+
     model = Model(input_tensor, x)
     # model.load_weights('models/base.h5',by_name=True)
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
-    model2 = multi_gpu_model(model, 2)
 
-    model2.compile(optimizer=Adam(0.0001), loss='categorical_crossentropy', metrics=[acc])
-    model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=3, validation_data=(X_valid, y_valid))
+    model.compile(optimizer=Adam(0.0001), loss='categorical_crossentropy', metrics=[acc])
+    model.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=3,
+                         validation_data=(X_valid, y_valid))
 
-    model2.compile(optimizer=Adam(0.000025), loss='categorical_crossentropy', metrics=[acc])
-    model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=2, validation_data=(X_valid, y_valid))
+    model.compile(optimizer=Adam(0.000025), loss='categorical_crossentropy', metrics=[acc])
+    model.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=2,
+                         validation_data=(X_valid, y_valid))
 
-    model2.compile(optimizer=Adam(0.00000625), loss='categorical_crossentropy', metrics=[acc])
-    model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=3, validation_data=(X_valid, y_valid))
+    model.compile(optimizer=Adam(0.00000625), loss='categorical_crossentropy', metrics=[acc])
+    model.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=3,
+                         validation_data=(X_valid, y_valid))
 
-    model2.compile(optimizer=Adam(0.00000425), loss='categorical_crossentropy', metrics=[acc])
-    model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=1, validation_data=(X_valid, y_valid))
+    model.compile(optimizer=Adam(0.00000425), loss='categorical_crossentropy', metrics=[acc])
+    model.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=1,
+                         validation_data=(X_valid, y_valid))
 
-    model2.compile(optimizer=Adam(0.000001), loss='categorical_crossentropy', metrics=[acc])
-    model2.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=1, validation_data=(X_valid, y_valid))
+    model.compile(optimizer=Adam(0.000001), loss='categorical_crossentropy', metrics=[acc])
+    model.fit_generator(gen_train.generator, steps_per_epoch=gen_train.steps, epochs=1,
+                         validation_data=(X_valid, y_valid))
     model.save_weights('models/%s.h5' % model_name)
 
     del X
